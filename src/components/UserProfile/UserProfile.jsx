@@ -8,6 +8,8 @@ function UserProfile() {
     const fetchUserData = async () => {
         auth.onAuthStateChanged(async (user) => {
             setUserDetails(user);
+            console.log(user);
+            // console.log(user.photoURL);
         });
     };
     useEffect(() => {
@@ -27,16 +29,22 @@ function UserProfile() {
         <div>
             {userDetails ? (
                 <>
+                    <div className="flex flex-col justify-center mt-5">
                     <div className="flex justify-center">
-                        <img src={userDetails.photoUrl} className="w-50"/>
+                        <img src={userDetails.photoURL} className="rounded-full"/>
                     </div>
+                    <div className="flex justify-center my-5">
                     <h3>Welcome {userDetails.displayName}</h3>
-                    <div>
+                    </div>
+                    <div className="flex justify-center">
                         <p>Email: {userDetails.email}</p>
                     </div>
+                    <div className="flex justify-center my-5">
                     <button className="p-3 font-bold text-white bg-teal-600 rounded-lg hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-600" onClick={handleLogout}>
                         Logout
                     </button>
+                    </div>
+                    </div>
                 </>
             ) : (
                 <p>Loading...</p>
